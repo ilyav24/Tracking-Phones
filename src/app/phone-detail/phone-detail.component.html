@@ -1,9 +1,11 @@
-<div *ngIf="selectedPhone">
-    <h2>{{selectedPhone.location | uppercase}} Details</h2>
-    <div><span>id: </span>{{selectedPhone.id}}</div>
+<div *ngIf="phone">
+
+    <h2>{{phone.location | uppercase}} Details</h2>
+    <div><span>id: </span>{{phone.id}}</div>
     <div>
         <label>location:
-            <input [(ngModel)]="selectedPhone.location" placeholder="location" />
+            <input [(ngModel)]="phone.location" placeholder="location" />
         </label>
     </div>
+
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Phone } from '../phone'
-import { PHONES } from '../mock-phones'
+import { PhoneService } from '../phone.service'
 
 @Component({
   selector: 'app-phones',
@@ -9,13 +9,19 @@ import { PHONES } from '../mock-phones'
 })
 export class PhonesComponent implements OnInit {
 
-  phones = PHONES;
+  phones?: Phone[];
   selectedPhone?: Phone;
 
-  constructor() { }
+  constructor(private phoneService: PhoneService) {
+
+  }
 
   ngOnInit(): void {
-    
+    this.getPhones();
+  }
+  getPhones(): void {
+    this.phoneService.getPhones()
+      .subscribe(phones => this.phones = phones);
   }
   onSelect(phone: Phone): void {
     this.selectedPhone = phone;
