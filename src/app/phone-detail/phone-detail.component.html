@@ -1,0 +1,9 @@
+<div *ngIf="selectedPhone">
+    <h2>{{selectedPhone.location | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedPhone.id}}</div>
+    <div>
+        <label>location:
+            <input [(ngModel)]="selectedPhone.location" placeholder="location" />
+        </label>
+    </div>
+</div>

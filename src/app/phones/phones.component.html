@@ -1,1 +1,9 @@
-<p>phones works!</p>
+<h2>My Phones</h2>
+<ul class="phones">
+    <li *ngFor="let phone of phones" 
+    [class.selected]="phone === selectedPhone"
+    (click)="onSelect(phone)">
+        <span class="badge">{{phone.id}}</span> {{phone.location}}
+    </li>
+</ul>
+
