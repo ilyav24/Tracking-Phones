@@ -7,13 +7,15 @@ import { PhonesComponent } from './phones/phones.component';
 import { FormsModule } from '@angular/forms';
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhonesComponent,
     PhoneDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
