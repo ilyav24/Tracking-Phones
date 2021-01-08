@@ -9,10 +9,18 @@ import { MessageService } from './message.service';
 })
 export class PhoneService {
 
+  constructor(private MessageService: MessageService) { }
+
   getPhones(): Observable<Phone[]> {
     // TODO: send message _after_ fethching the phones
     this.MessageService.add('PhoneService: fetched phones')
     return of(PHONES);
   }
-  constructor(private MessageService: MessageService) { }
+
+  getPhone(id: number): Observable<Phone | undefined> {
+    // TODO: send message _after_ fethching the phones
+    this.MessageService.add(`PhoneService: fetched phone id=${id}`)
+    return of(PHONES.find(phone => phone.id === id));
+  }
+  
 }

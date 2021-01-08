@@ -11,10 +11,8 @@ import { PhoneService } from '../phone.service'
 export class PhonesComponent implements OnInit {
 
   phones?: Phone[];
-  selectedPhone?: Phone;
 
-  constructor(private phoneService: PhoneService, private MessageService: MessageService) {
-
+  constructor(private phoneService: PhoneService) {
   }
 
   ngOnInit(): void {
@@ -23,10 +21,6 @@ export class PhonesComponent implements OnInit {
   getPhones(): void {
     this.phoneService.getPhones()
       .subscribe(phones => this.phones = phones);
-  }
-  onSelect(phone: Phone): void {
-    this.selectedPhone = phone;
-    this.MessageService.add(`PhonesComponent: Selected phone id= ${phone.id}`);
   }
 
 }

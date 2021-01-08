@@ -1,10 +1,8 @@
 <h2>My Phones</h2>
 <ul class="phones">
-    <li *ngFor="let phone of phones" 
-    [class.selected]="phone === selectedPhone"
-    (click)="onSelect(phone)">
-        <span class="badge">{{phone.id}}</span> {{phone.location}}
+    <li *ngFor="let phone of phones" >
+        <a routerLink="/detail/{{phone.id}}">
+            <span class="badge">{{phone.id}}</span> {{phone.location}}
+         </a>
     </li>
 </ul>
-
-<app-phone-detail [phone]="selectedPhone"></app-phone-detail>

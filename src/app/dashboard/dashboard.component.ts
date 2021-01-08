@@ -9,9 +9,17 @@ import { PhoneService } from '../phone.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  phones: Phone[] = [];
+
+  constructor(private phoneService: PhoneService) { }
 
   ngOnInit(): void {
+    this.getPhones();
+  }
+
+  getPhones(): void{
+    this.phoneService.getPhones()
+      .subscribe(phones => this.phones = phones.slice(1,5))
   }
 
 }
