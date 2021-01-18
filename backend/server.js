@@ -1,17 +1,22 @@
-// setup server.js file to serve our application
-var app = require('express')();
-var http = require('http').createServer(app);
-// import socket.io to server.js file
-var io = require('socket.io') (http);
+const express = require('express')
+const app = express();
 
-io.on('connection',(socket) => {
-    console.log('a user has connected');
+const http = require('http');
+const server = http.Server(app);
+
+const io = require('socket.io')(server, {
+    cors: {
+      origin: '*',
+    }
+  });
+
+const port = process.env.PORT || 3000;
+
+io.on('connection', (socket) => {
+    console.log('user connected');
     socket.emit('test event', 'here is some data')
-    
-})
+});
 
-app.get('/', (req, res) => res.send('hello!'));
-
-http.listen(4200, () => {
-  console.log('listening on *:4200');
+server.listen(port, () => {
+    console.log(`started on port: ${port}`);
 });

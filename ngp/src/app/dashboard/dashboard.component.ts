@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Phone } from '../phone';
 import { PhoneService } from '../phone.service';
 import { WebSocketService } from '../web-socket.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +13,13 @@ export class DashboardComponent implements OnInit {
 
   phones: Phone[] = [];
 
-  constructor(private phoneService: PhoneService,private webSocketService: WebSocketService) { }
+  constructor(private phoneService: PhoneService,private webSocketService: WebSocketService,private MessageService: MessageService) { }
 
   ngOnInit(): void {
     // here we want to listen to an event from the socket.io server
     this.webSocketService.listen('test event').subscribe((data) => {
       console.log(data);
+      this.MessageService.add('User connected');
     });
 
     this.webSocketService.listen('connected message').subscribe((data) => {
