@@ -17,9 +17,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // here we want to listen to an event from the socket.io server
-    this.webSocketService.listen('test event').subscribe((data) => {
+    this.webSocketService.listen('broadcast').subscribe((data) => {
       console.log(data);
-      this.MessageService.add('User connected');
+      this.MessageService.add(data);
     });
 
     this.webSocketService.listen('connected message').subscribe((data) => {

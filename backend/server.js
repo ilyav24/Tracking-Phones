@@ -12,9 +12,14 @@ const io = require('socket.io')(server, {
 
 const port = process.env.PORT || 3000;
 
-io.on('connection', (socket) => {
-    console.log('user connected');
-    socket.emit('test event', 'here is some data')
+var clients = 0;
+io.on('connection', function(socket) {
+   clients++;
+   io.sockets.emit('broadcast',clients + ' clients connected!');
+   socket.on('disconnect', function () {
+      clients--;
+      io.sockets.emit('broadcast', clients + ' clients connected!');
+   });
 });
 
 server.listen(port, () => {

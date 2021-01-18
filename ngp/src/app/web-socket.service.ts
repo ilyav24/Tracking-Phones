@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import {io} from 'socket.io-client/build/index';
 import * as socketIo from 'socket.io-client';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 
 @Injectable({
