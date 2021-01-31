@@ -1,7 +1,17 @@
 <h1>{{title}}</h1>
-<nav>
+<!--
+    to hide the nav bar from clients
+    We will create a service that checks wether the user has connected
+    to the dashboard as admin
+    and communicates once the user has connected as admin
+    from dashboard through subject and main component which has
+    the nav bar and message box elements listens through observable
+    using the hide-nav service has a contoller/middleman
+    
+    never thought hiding a nav bar would be this difficult-->
+<nav *ngIf="getLoggedIn()">
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/phones">Phones</a>
 </nav>
 <router-outlet></router-outlet>
-<app-messages></app-messages>
+<app-messages *ngIf="getLoggedIn()"></app-messages>

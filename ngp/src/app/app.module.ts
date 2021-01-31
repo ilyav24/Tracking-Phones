@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { UserPermissionComponent } from './user-permission/user-permission.component';
+import { StandByComponent } from './stand-by/stand-by.component';
 
 @NgModule({
   
@@ -21,7 +22,8 @@ import { UserPermissionComponent } from './user-permission/user-permission.compo
     PhoneDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    UserPermissionComponent
+    UserPermissionComponent,
+    StandByComponent
   ],
   imports: [
     BrowserModule,

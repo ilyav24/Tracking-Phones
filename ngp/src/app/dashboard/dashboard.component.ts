@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Phone } from '../phone';
 import { PhoneService } from '../phone.service';
 import { WebSocketService } from '../web-socket.service';
 import { MessageService } from '../message.service';
+import { HideNavService } from '../hide-nav.service';
+import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,9 +16,17 @@ import { MessageService } from '../message.service';
 export class DashboardComponent implements OnInit {
 
   phones: Phone[] = [];
+  
 
-  constructor(private phoneService: PhoneService,private webSocketService: WebSocketService,private MessageService: MessageService) { }
+  constructor(
+    private phoneService: PhoneService,
+    private webSocketService: WebSocketService,
+    private MessageService: MessageService,
+    private hideNavService: HideNavService,
+    ) { }
 
+  
+  
   ngOnInit(): void {
     // here we want to listen to an event from the socket.io server
     this.webSocketService.listen('broadcast').subscribe((data) => {
@@ -27,14 +39,20 @@ export class DashboardComponent implements OnInit {
     });
 
 
-
+    this.enteredDashboard();
     this.getPhones();
+
+
     
   }
 
   getPhones(): void{
     this.phoneService.getPhones()
       .subscribe(phones => this.phones = phones.slice(1,5))
+  }
+
+  enteredDashboard(){
+    this.hideNavService.sendEnterEvent();
   }
 
 }
