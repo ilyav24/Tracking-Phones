@@ -31,7 +31,12 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "socket.io-client",
+              "socket.io-parser",
+              "debug"
+              ]
           },
           "configurations": {
             "production": {

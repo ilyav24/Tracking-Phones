@@ -4,14 +4,15 @@
     We will create a service that checks wether the user has connected
     to the dashboard as admin
     and communicates once the user has connected as admin
-    from dashboard through subject and main component which has
+    from dashboard through subject to main component which has
     the nav bar and message box elements listens through observable
     using the hide-nav service has a contoller/middleman
+    app.component.html uses *ngIf to check wether the admin logged in or not
     
     never thought hiding a nav bar would be this difficult-->
-<nav *ngIf="getLoggedIn()">
+<nav *ngIf="this.hideNavService.getLoggedIn()">
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/phones">Phones</a>
 </nav>
 <router-outlet></router-outlet>
-<app-messages *ngIf="getLoggedIn()"></app-messages>
+<app-messages *ngIf="this.hideNavService.getLoggedIn()"></app-messages>

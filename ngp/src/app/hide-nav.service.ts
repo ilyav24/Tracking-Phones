@@ -7,7 +7,12 @@ import {Observable, Subject} from 'rxjs';
 export class HideNavService {
   private subject = new Subject<any>();
 
-  constructor() { }
+  // To control if the user is admin in or not, we will use a BehaviorSubject
+  private loggedIn: boolean = false
+
+  constructor() {
+    
+   }
 
   // sending event of entry to  dashboard view
   sendEnterEvent(){
@@ -19,4 +24,14 @@ export class HideNavService {
   getEnterEvent():Observable<any>{
     return this.subject.asObservable();
  }
+
+ // logged in getter
+ getLoggedIn() {
+  return this.loggedIn;
+}
+
+// logged in setter
+setLoggedIn(flag: boolean) {
+  this.loggedIn = flag;
+}
 }

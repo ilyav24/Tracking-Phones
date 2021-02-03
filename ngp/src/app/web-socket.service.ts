@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import * as socketIo from 'socket.io-client';
+import { Router } from '@angular/router'
 
 
 @Injectable({
@@ -11,9 +12,11 @@ export class WebSocketService {
 
 
   private socket: SocketIOClient.Socket;
-  readonly uri: string = "http://localhost:3000";
+  readonly uri: string = "http://localhost:3000" + this.router.url;
 
-  constructor() {
+  constructor(private router: Router) {
+    // how do we know which component we're using the service from?
+    // so that we can diffrentiate admin from client
     this.socket = socketIo.connect(this.uri);
    }
 

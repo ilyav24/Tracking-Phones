@@ -5,23 +5,43 @@ const http = require('http');
 const server = http.Server(app);
 
 const io = require('socket.io')(server, {
-    cors: {
-      origin: '*',
-    }
-  });
+  cors: {
+    origin: '*',
+  }
+});
 
 const port = process.env.PORT || 3000;
 
 var clients = 0;
-io.on('connection', function(socket) {
-   clients++;
-   io.sockets.emit('broadcast',clients + ' clients connected!');
-   socket.on('disconnect', function () {
-      clients--;
-      io.sockets.emit('broadcast', clients + ' clients connected!');
-   });
+// io.on('connection', function (socket) {
+//   clients++;
+//   io.sockets.emit('broadcast', clients + ' clients connected!');
+//   socket.on('disconnect', function () {
+//     clients--;
+//     io.sockets.emit('broadcast', clients + ' clients connected!');
+//   });
+// });
+
+
+
+var admin = io.of('/dashboard'),
+  client = io.of('/user');
+
+admin.on('connection', function (socket) {
+  admin.emit('broadcast', 'one admin and ' + clients 
+    + ' clients connected!');
+});
+
+client.on('connection', function (socket) {
+  clients++;
+  admin.emit('broadcast', clients + ' clients connected!');
+  client.on('disconnect', function () {
+    clients--;
+    admin.emit('broadcast', clients + ' clients connected!');
+  });
+  
 });
 
 server.listen(port, () => {
-    console.log(`started on port: ${port}`);
+  console.log(`started on port: ${port}`);
 });

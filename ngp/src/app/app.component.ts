@@ -12,24 +12,11 @@ export class AppComponent {
   title = 'Tracking App';
 
   // will subscribe to the enter method in hide-nav service
-  enteredEventSubscription:Subscription;
+  enteredEventSubscription: Subscription;
 
-  // To control if the user is admin in or not, we will use a BehaviorSubject
-  private loggedIn :boolean=false;
-
-  // logged in getter
-  getLoggedIn() {
-    return this.loggedIn;
-  }
-
-  // logged in setter
-  setLoggedIn(flag: boolean) {
-     this.loggedIn=flag;
-  }
-
-  constructor(private hideNavService: HideNavService) {
-    this.enteredEventSubscription= this.hideNavService.getEnterEvent().subscribe(()=>{
-      this.setLoggedIn(true);
+  constructor(public hideNavService: HideNavService) {
+    this.enteredEventSubscription = this.hideNavService.getEnterEvent().subscribe(() => {
+      this.hideNavService.setLoggedIn(true);
     })
   }
 }
