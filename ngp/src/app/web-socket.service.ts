@@ -17,6 +17,8 @@ export class WebSocketService {
   constructor(private router: Router) {
     // how do we know which component we're using the service from?
     // so that we can diffrentiate admin from client
+    // we use the uri with the router path /dashboard is admin
+    // while /standby is client
     this.socket = socketIo.connect(this.uri);
    }
 

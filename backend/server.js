@@ -25,7 +25,7 @@ var clients = 0;
 
 
 var admin = io.of('/dashboard'),
-  client = io.of('/user');
+  client = io.of('/standby');
 
 admin.on('connection', function (socket) {
   admin.emit('broadcast', 'one admin and ' + clients 
