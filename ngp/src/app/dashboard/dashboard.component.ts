@@ -38,8 +38,8 @@ export class DashboardComponent implements OnInit {
       console.log(data);
     });
 
-
-    this.enteredDashboard();
+    // wrap in setTimeout to make the call async
+    setTimeout(()=>this.enteredDashboard(),0)
     this.getPhones();
 
 
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
   }
 
   enteredDashboard(){
-    this.hideNavService.sendEnterEvent();
+    this.hideNavService.setLoggedIn(true);
   }
 
 }

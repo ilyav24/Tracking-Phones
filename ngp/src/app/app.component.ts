@@ -8,15 +8,21 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Tracking App';
+  getLoggedIn?: boolean;
 
   // will subscribe to the enter method in hide-nav service
-  enteredEventSubscription: Subscription;
+  
 
   constructor(public hideNavService: HideNavService) {
-    this.enteredEventSubscription = this.hideNavService.getEnterEvent().subscribe(() => {
-      this.hideNavService.setLoggedIn(true);
-    })
+    // this.enteredEventSubscription = this.hideNavService.getEnterEvent().subscribe(() => {
+    //  this.hideNavService.setLoggedIn(true);
+    // })
+  }
+
+  ngOnInit() { 
+    // subscribe to currentLogState observable which indicates wether the user signed in as admin
+    this.hideNavService.currentLogState.subscribe(getLoggedIn => this.getLoggedIn = getLoggedIn)
   }
 }

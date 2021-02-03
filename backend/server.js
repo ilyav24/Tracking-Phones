@@ -28,14 +28,14 @@ var admin = io.of('/dashboard'),
   client = io.of('/standby');
 
 admin.on('connection', function (socket) {
-  admin.emit('broadcast', 'one admin and ' + clients 
+  socket.emit('broadcast', 'one admin and ' + clients 
     + ' clients connected!');
 });
 
 client.on('connection', function (socket) {
   clients++;
   admin.emit('broadcast', clients + ' clients connected!');
-  client.on('disconnect', function () {
+  socket.on('disconnect', function () {
     clients--;
     admin.emit('broadcast', clients + ' clients connected!');
   });

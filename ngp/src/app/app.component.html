@@ -10,9 +10,9 @@
     app.component.html uses *ngIf to check wether the admin logged in or not
     
     never thought hiding a nav bar would be this difficult-->
-<nav *ngIf="this.hideNavService.getLoggedIn()">
+<nav *ngIf="getLoggedIn">
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/phones">Phones</a>
 </nav>
 <router-outlet></router-outlet>
-<app-messages *ngIf="this.hideNavService.getLoggedIn()"></app-messages>
+<app-messages *ngIf="getLoggedIn"></app-messages>
