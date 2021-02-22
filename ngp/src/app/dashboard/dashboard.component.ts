@@ -55,4 +55,9 @@ export class DashboardComponent implements OnInit {
     this.hideNavService.setLoggedIn(true);
   }
 
+  getLocations(): void {
+    console.log("emitting locations from dashboard")
+    this.webSocketService.emitClients();
+  }
+
 }

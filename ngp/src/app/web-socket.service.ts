@@ -12,13 +12,19 @@ export class WebSocketService {
 
 
   private socket: SocketIOClient.Socket;
-  readonly uri: string = "http://localhost:3000" + this.router.url;
+  // how to check if the phone/mobile socket connects to the server?
+  // need to test by connecting my phone to the service
+  // 1 way is ngrok program
+  
+  
+  readonly uri: string = "localhost:3000" + this.router.url;
 
   constructor(private router: Router) {
     // how do we know which component we're using the service from?
     // so that we can diffrentiate admin from client
     // we use the uri with the router path /dashboard is admin
     // while /standby is client
+    //console.log(this.uri);
     this.socket = socketIo.connect(this.uri);
    }
 
@@ -32,5 +38,11 @@ export class WebSocketService {
 
   emit(eventName: string, data: any){
     this.socket.emit(eventName, data);
+    
+  }
+
+  emitClients(){
+    console.log("emitting to clients from websocket service");
+    this.socket.emit('find locations',"");
   }
 }

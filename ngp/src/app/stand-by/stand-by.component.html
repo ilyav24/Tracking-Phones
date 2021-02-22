@@ -1,1 +1,7 @@
 <h1>Please stand by</h1>
+
+<div *ngFor="let post of posts | async">
+
+    {{ post | json }}
+
+</div>

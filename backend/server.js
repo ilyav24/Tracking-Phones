@@ -30,6 +30,11 @@ var admin = io.of('/dashboard'),
 admin.on('connection', function (socket) {
   socket.emit('broadcast', 'one admin and ' + clients 
     + ' clients connected!');
+
+  socket.on('find locations', function() {
+    console.log("server received message")
+    client.emit('location request');
+  })
 });
 
 client.on('connection', function (socket) {
@@ -39,8 +44,17 @@ client.on('connection', function (socket) {
     clients--;
     admin.emit('broadcast', clients + ' clients connected!');
   });
+
+  
+  
   
 });
+
+admin.on('find locations', function (socket) {
+  console.log("broadcasting to sockets from server")
+  
+});
+
 
 server.listen(port, () => {
   console.log(`started on port: ${port}`);
