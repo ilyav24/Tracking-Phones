@@ -7,7 +7,6 @@ import { HideNavService } from '../hide-nav.service';
 import { Observable, Subject } from 'rxjs';
 import { AppComponent } from '../app.component';
 import { BehaviorSubject } from 'rxjs';
-import { Location } from '../Location';
 
 @Component({
   selector: 'app-dashboard',

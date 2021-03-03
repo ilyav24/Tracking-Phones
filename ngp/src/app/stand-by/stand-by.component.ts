@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from '../web-socket.service';
 import { MessageService } from '../message.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, multicast } from 'rxjs/operators';
-import { Location } from '../Location';
 
 
 @Component({
@@ -16,9 +13,8 @@ export class StandByComponent implements OnInit {
 
   readonly GEO_URL = 'http://geoplugin.net/json.gp'
 
-  //location$?: Observable<Location>;
-  //location?: Location;
-  visitors:any = [];
+  
+  visitors: any = [];
 
   constructor(
     private webSocketService: WebSocketService,
@@ -39,47 +35,27 @@ export class StandByComponent implements OnInit {
 
     this.webSocketService.listen('location request').subscribe(() => {
       console.log("called location")
-      //this.MessageService.add("called location");
-      //this.location$ = this.http.get<Location>(this.GEO_URL);
-
+      
       this.http.get(this.GEO_URL).toPromise().then((data: any) => {
 
+        for (let value in data) {
+          if (data.hasOwnProperty(value)) {
+            if (
+              value === 'geoplugin_request' ||
+              value === 'geoplugin_city' ||
+              value === 'geoplugin_countryName' ||
+              value === 'geoplugin_latitude' ||
+              value === 'geoplugin_longitude') {
 
-        /* this.location =
-        {
-          res['geoplugin_request'],
-          res['geoplugin_city'],
-          res['geoplugin_countryName'],
-          res['geoplugin_latitude'],
-          res['geoplugin_longitude']
-        }; */
-        for (let value in data){
-          if(data.hasOwnProperty(value)){
-            this.visitors.push(data[value]);
-            console.log(value)
+              this.visitors.push(data[value]);
+              console.log(value)
+            }
           }
         }
-
-
-
       });
 
       this.webSocketService.emit('sent location', this.visitors);
-      this.visitors =[];
-
-      // const {
-      //   geoplugin_request,
-      //   geoplugin_countryName,
-      //   geoplugin_city
-      // } = this.posts.data;
-
-      // const visitor = {
-      //   ip: geoplugin_request,
-      //   countryName: geoplugin_countryName,
-      //   city: geoplugin_city
-      // }
-
-      // this.visitors = [visitor];
+      this.visitors = [];
     });
   }
 
