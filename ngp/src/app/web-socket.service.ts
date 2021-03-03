@@ -28,6 +28,8 @@ export class WebSocketService {
     this.socket = socketIo.connect(this.uri);
    }
 
+   
+
   listen(eventName: string) {
     return new Observable((subscriber) => {
       this.socket.on(eventName,(data: unknown) => {
@@ -39,10 +41,5 @@ export class WebSocketService {
   emit(eventName: string, data: any){
     this.socket.emit(eventName, data);
     
-  }
-
-  emitClients(){
-    console.log("emitting to clients from websocket service");
-    this.socket.emit('find locations',"");
   }
 }

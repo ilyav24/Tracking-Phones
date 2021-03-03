@@ -13,16 +13,6 @@ const io = require('socket.io')(server, {
 const port = process.env.PORT || 3000;
 
 var clients = 0;
-// io.on('connection', function (socket) {
-//   clients++;
-//   io.sockets.emit('broadcast', clients + ' clients connected!');
-//   socket.on('disconnect', function () {
-//     clients--;
-//     io.sockets.emit('broadcast', clients + ' clients connected!');
-//   });
-// });
-
-
 
 var admin = io.of('/dashboard'),
   client = io.of('/standby');
@@ -45,16 +35,10 @@ client.on('connection', function (socket) {
     admin.emit('broadcast', clients + ' clients connected!');
   });
 
-  
-  
-  
+  socket.on('sent location', function (location$) {
+    admin.emit('sent location',location$);
+  })
 });
-
-admin.on('find locations', function (socket) {
-  console.log("broadcasting to sockets from server")
-  
-});
-
 
 server.listen(port, () => {
   console.log(`started on port: ${port}`);

@@ -4,9 +4,10 @@ import { PhoneService } from '../phone.service';
 import { WebSocketService } from '../web-socket.service';
 import { MessageService } from '../message.service';
 import { HideNavService } from '../hide-nav.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AppComponent } from '../app.component';
 import { BehaviorSubject } from 'rxjs';
+import { Location } from '../Location';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 export class DashboardComponent implements OnInit {
 
   phones: Phone[] = [];
+  location$?: Location;
   
 
   constructor(
@@ -42,7 +44,10 @@ export class DashboardComponent implements OnInit {
     setTimeout(()=>this.enteredDashboard(),0)
     this.getPhones();
 
-
+    //this.location$=this.webSocketService.listen('sent location')
+    this.webSocketService.listen('sent location').subscribe((data) => {
+      console.log(data);
+    });
     
   }
 
@@ -57,7 +62,7 @@ export class DashboardComponent implements OnInit {
 
   getLocations(): void {
     console.log("emitting locations from dashboard")
-    this.webSocketService.emitClients();
+    this.webSocketService.emit('find locations',"");
   }
 
 }
