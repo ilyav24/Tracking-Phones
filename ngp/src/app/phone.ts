@@ -1,4 +1,7 @@
 export interface Phone {
-    id:number;
-    location: string;
+    ip:string;
+    city: string;
+    country: string;
+    latitude: string;
+    longtitude: string;
 }

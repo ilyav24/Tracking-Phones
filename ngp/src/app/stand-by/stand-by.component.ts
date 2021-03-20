@@ -48,7 +48,6 @@ export class StandByComponent implements OnInit {
               value === 'geoplugin_longitude') {
 
               this.visitors.push(data[value]);
-              console.log(value)
             }
           }
         }

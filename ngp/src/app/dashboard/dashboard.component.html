@@ -1,9 +1,9 @@
 <h3>Recent Locations</h3>
 <div class="grid grid-pad">
     <a *ngFor="let phone of phones" class="col-1-4"
-        routerLink="/detail/{{phone.id}}">
+        routerLink="/detail/{{phone.ip}}">
         <div class="module phone">
-            <h4>{{phone.location}}</h4>
+            <h4>{{phone.city}}</h4>
         </div>
     </a>
 </div>

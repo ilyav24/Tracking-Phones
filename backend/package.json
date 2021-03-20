@@ -11,7 +11,10 @@
   "dependencies": {
     "@types/socket.io": "^2.1.12",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
     "socket.io": "^3.0.5"
   }
 }

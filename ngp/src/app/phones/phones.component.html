@@ -1,8 +1,8 @@
 <h2>My Phones</h2>
 <ul class="phones">
     <li *ngFor="let phone of phones" >
-        <a routerLink="/detail/{{phone.id}}">
-            <span class="badge">{{phone.id}}</span> {{phone.location}}
+        <a routerLink="/detail/{{phone.ip}}">
+            <span class="badge">{{phone.ip}}</span> {{phone.city}}
          </a>
     </li>
     
