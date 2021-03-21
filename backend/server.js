@@ -74,10 +74,10 @@ longtitude VARCHAR(255))`, (err, res) => {
 
   // communicate with dashboard component(admin) by sending him all the locations by ip
   app.get("/api/phones/:id", async (req, res) => {
-    const {row}  = await pool.query(`SELECT * FROM locations WHERE id= $1`, [req.params.id]).catch((err) => {
+    const {rows}  = await pool.query(`SELECT * FROM locations WHERE id= $1`, [req.params.id]).catch((err) => {
       console.log(err)
     })
-    res.status(200).send(row);
+    res.status(200).send(rows[0]);
     
   });
 

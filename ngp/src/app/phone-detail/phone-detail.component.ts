@@ -13,6 +13,7 @@ import { PhoneService } from '../phone.service';
 })
 export class PhoneDetailComponent implements OnInit {
   phone?: Phone;
+  public map: any = { lat: 51.678418, lng: 7.809007 };
   constructor(
     private route: ActivatedRoute,
     private phoneService: PhoneService,
@@ -32,5 +33,6 @@ export class PhoneDetailComponent implements OnInit {
   goBack(): void {
     this.locationURL.back();
   }
-  
+
+ 
 }
