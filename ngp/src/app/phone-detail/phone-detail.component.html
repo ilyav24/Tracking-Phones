@@ -1,7 +1,12 @@
 <div *ngIf="phone">
 
     <h2>{{phone.city | uppercase}} Details</h2>
-    <div><span>ip: </span>{{phone.ip}}</div>
+    <div><span>id: </span>{{phone.id}}</div>
+    <div>
+        <label>ip:
+            <input [(ngModel)]="phone.ip" placeholder="ip" />
+        </label>
+    </div>
     <div>
         <label>city:
             <input [(ngModel)]="phone.city" placeholder="city" />
@@ -13,14 +18,15 @@
         </label>
     </div>
     <div>
-        <label>longtitude:
-            <input [(ngModel)]="phone.longtitude" placeholder="longtitude" />
-        </label>
-    </div>
-    <div>
         <label>latitude:
             <input [(ngModel)]="phone.latitude" placeholder="latitude" />
         </label>
     </div>
+    <div>
+        <label>longtitude:
+            <input [(ngModel)]="phone.longtitude" placeholder="longtitude" />
+        </label>
+    </div>
+    
     <button (click)="goBack()">go back</button>
 </div>

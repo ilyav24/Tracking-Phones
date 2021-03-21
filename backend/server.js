@@ -34,19 +34,21 @@ admin.on('connection', function (socket) {
 
   // try to create new table for dashboard component (admin)
   pool.query(`CREATE TABLE IF NOT EXISTS locations 
-(ip VARCHAR(255), 
-city VARCHAR(255), 
+(id SERIAL PRIMARY KEY,
+  ip VARCHAR(255), 
+city VARCHAR(255) NOT NULL, 
 country VARCHAR(255), 
 latitude VARCHAR(255), 
 longtitude VARCHAR(255))`, (err, res) => {
     if (err) {
       console.log(err);
     }
+
   })
 
   // communicate with dashboard component(admin) by sending him all the locations
 
- 
+
   // var someVar= [];
 
   // app.get("/api/phones", async (req, res) => {
@@ -66,18 +68,17 @@ longtitude VARCHAR(255))`, (err, res) => {
   // });
 
   app.get("/api/phones", async (req, res) => {
-    const {rows} =await pool.query(`SELECT * FROM public.locations`).catch(err => {
-      console.log(err);
-    });
+    const { rows } = await pool.query(`SELECT * FROM public.locations`).catch()
     res.status(200).json(rows);
-   });
+  });
 
   // communicate with dashboard component(admin) by sending him all the locations by ip
-  app.get("/api/phones/:ip", async (req, res) => {
-    const { rows } = await pool.query(`SELECT * FROM locations WHERE ip=${req.params.ip}`).catch(err => {
-      console.log(err);
-    });
-    res.status(200).json(rows);
+  app.get("/api/phones/:id", async (req, res) => {
+    const {row}  = await pool.query(`SELECT * FROM locations WHERE id= $1`, [req.params.id]).catch((err) => {
+      console.log(err)
+    })
+    res.status(200).send(row);
+    
   });
 
 
@@ -102,11 +103,13 @@ client.on('connection', function (socket) {
 
   socket.on('sent location', async function (location$) {
     // try to insert location into database
-    await pool.query(`INSERT INTO locations VALUES($1 , $2 , $3 , $4, $5)`,
-      [location$[0], location$[1], location$[2], location$[3], location$[4]]).catch(err => {
-        console.log(err);
-      });
-
+    await pool.query(`INSERT INTO locations(ip, city, country, latitude, longtitude) VALUES($1 , $2 , $3 , $4, $5)`,
+      [location$[0], location$[1], location$[2], location$[3], location$[4]], (err,res) => {
+        if(err){
+          console.log(err);
+        }
+      })
+      
     admin.emit('sent location', location$);
   })
 });

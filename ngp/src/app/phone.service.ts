@@ -28,7 +28,7 @@ export class PhoneService {
   }
 
 
-  getPhone(id: number): Observable<Phone | undefined> {
+  getPhone(id: number): Observable<Phone> {
     // TODO: send message _after_ fethching the phones
     const url = `${this.phonesUrl}/${id}`;
     return this.http.get<Phone>(url).pipe(
